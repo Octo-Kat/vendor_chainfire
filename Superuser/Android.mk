@@ -11,16 +11,20 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-ifneq ($(filter arm arm64, $(TARGET_ARCH)),)
+ifneq ($(filter arm arm64 armv7, $(TARGET_ARCH)),)
     local_arch := arm
 else ifneq ($(filter x86 x86_64, $(TARGET_ARCH)),)
     local_arch := x86
+else ifneq ($(filter x64 x64_64, $(TARGET_ARCH)),)
+    local_arch := x64
+else ifneq ($(filter mips mips64, $(TARGET_ARCH)),)
+    local_arch := mips
 endif
 
 ifneq ($(local_arch),)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := SuperSu
+LOCAL_MODULE := Superuser
 LOCAL_SRC_FILES := common/$(LOCAL_MODULE).apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := optional
